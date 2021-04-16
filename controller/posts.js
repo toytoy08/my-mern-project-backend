@@ -10,3 +10,14 @@ export const getPosts = async (reg, res) => {
         res.status(404).json({ message: error.message });
     }
 }
+
+export const createPost = async (reg, res) => {
+    const post = reg.body;
+    const newPost = new PostMessage(post);
+    try {
+        await newPost.save();
+        res.status(201).json(newPost);
+    } catch (error) {
+        res.status(409).json({ message: error.message });
+    }
+}
